@@ -30,7 +30,7 @@ const App = () => {
             className={`object-cover w-full h-full px-0 min-[550px]:px-[4rem] md:px-0 md:w-[521px] md:h-[191px]  ${
               colorMode === "dark" && "saturate-[0.8] brightness-[0.8]"
             }`}
-            src="/Pokemon-Logo.png"
+            src="./pokemon-logo.png"
             alt="Pokemon Logo"
             loading="eager"
           />
