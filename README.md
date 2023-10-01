@@ -1,8 +1,7 @@
 # Live Demo
 
-<a href="https://aitlaasri-aymane.github.io/pokelist/">
-<img width="1440" alt="Screen Shot 2023-10-01 at 11 03 54 PM" src="https://github.com/aitlaasri-aymane/pokelist/assets/84875875/1668d6dc-69e5-4fb8-8b7d-cdd70489aa6b">
-</a>
+[![Live Demo](https://github-production-user-asset-6210df.s3.amazonaws.com/84875875/271855867-1668d6dc-69e5-4fb8-8b7d-cdd70489aa6b.png)](https://aitlaasri-aymane.github.io/pokelist/)
+
 
 # Getting Started with Create React App
 
