@@ -1,0 +1,22 @@
+:root {
+  --bg-poke-color-normal: rgba(235, 204, 142, 0.835);
+  --bg-poke-color-fighting: rgba(221, 88, 88, 0.835);
+  --bg-poke-color-flying: rgba(175, 100, 225, 0.667);
+  --bg-poke-color-poison: rgba(165, 92, 205, 0.835);
+  --bg-poke-color-ground: rgba(235, 207, 142, 0.511);
+  --bg-poke-color-rock: rgba(203, 140, 95, 0.749);
+  --bg-poke-color-bug: rgba(156, 235, 142, 0.835);
+  --bg-poke-color-ghost: rgba(203, 142, 235, 0.835);
+  --bg-poke-color-steel: rgba(145, 148, 146, 0.835);
+  --bg-poke-color-fire: rgba(235, 142, 142, 0.835);
+  --bg-poke-color-water: rgba(142, 235, 215, 0.835);
+  --bg-poke-color-grass: rgba(144, 232, 123, 0.835);
+  --bg-poke-color-electric: rgba(235, 230, 142, 0.835);
+  --bg-poke-color-psychic: rgba(235, 142, 221, 0.835);
+  --bg-poke-color-ice: rgba(142, 235, 234, 0.835);
+  --bg-poke-color-dragon: rgba(149, 95, 203, 0.831);
+  --bg-poke-color-dark: rgba(148, 147, 144, 0.928);
+  --bg-poke-color-fairy: rgba(235, 142, 230, 0.42);
+  --bg-poke-color-unknown: rgba(247, 243, 233, 0.928);
+  --bg-poke-color-shadow: rgba(247, 233, 243, 0.928);
+}
