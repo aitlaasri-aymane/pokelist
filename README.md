@@ -39,8 +39,14 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### `npm run cypress:open`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To open Cypress for e2e tests
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Unit testing coverage
+
+<img width="608" alt="Screen Shot 2023-10-01 at 9 08 49 PM" src="https://github.com/aitlaasri-aymane/pokelist/assets/84875875/d38c654d-9356-4a7e-80c7-29134200d86e">
+
+### e2e testing scenarios
+
+<img width="1440" alt="Screen Shot 2023-10-01 at 10 35 12 PM" src="https://github.com/aitlaasri-aymane/pokelist/assets/84875875/87726212-d814-414a-a24c-6b8c4165d1f8">
