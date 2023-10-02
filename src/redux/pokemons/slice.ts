@@ -1,11 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { POKEMONS, PokeState, PokeType } from "./types";
+import { POKEMONS, PokeListState, PokeState, PokeType } from "./types";
 import { PageResultType } from "../pokemonPage/types";
 
-const pokeInitialState: PokeState = {
-  data: [],
-  loading: false,
-  error: "",
+const pokeInitialState: PokeListState = {
+  List: [] as PokeState[],
+  StateHolder: {} as PokeState,
 };
 
 export const pokeSlice = createSlice({
@@ -13,25 +12,40 @@ export const pokeSlice = createSlice({
   initialState: pokeInitialState,
   reducers: {
     getPokemonsAction: (
-      state: PokeState,
-      { payload: results }: PayloadAction<PageResultType[]>
+      state: PokeListState,
+      { payload: result }: PayloadAction<PageResultType>
     ) => {
-      state.loading = true;
-      state.error = "";
+      state.StateHolder.error = "";
+      state.StateHolder.loading = true;
+      state.StateHolder.data = {} as PokeType;
+      state.List.push(state.StateHolder);
+      state.StateHolder = {} as PokeState;
     },
     getPokemonsSuccessAction: (
-      state: PokeState,
-      { payload: pokemons }: PayloadAction<PokeType[]>
+      state: PokeListState,
+      { payload: pokemon }: PayloadAction<PokeType>
     ) => {
-      state.loading = false;
-      state.data = state.data.concat(pokemons);
+      const lastIndex = state.List.length - 1;
+      state.StateHolder.loading = false;
+      state.StateHolder.data = pokemon;
+      state.List[lastIndex] = {
+        ...state.List[lastIndex],
+        ...state.StateHolder,
+      };
+      state.StateHolder = {} as PokeState;
     },
     getPokemonsErrorAction: (
-      state: PokeState,
+      state: PokeListState,
       { payload: error }: PayloadAction<string>
     ) => {
-      state.loading = false;
-      state.error = error;
+      const lastIndex = state.List.length - 1;
+      state.StateHolder.loading = false;
+      state.StateHolder.error = error;
+      state.List[lastIndex] = {
+        ...state.List[lastIndex],
+        ...state.StateHolder,
+      };
+      state.StateHolder = {} as PokeState;
     },
   },
 });

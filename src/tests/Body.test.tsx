@@ -6,9 +6,9 @@ import { PageState } from "../redux/pokemonPage/types";
 import store from "../redux/store";
 import { Provider } from "react-redux";
 
-const pokemons: PokeState = {
-  data: [
-    {
+const pokemons: PokeState[] = [
+  {
+    data: {
       id: 1,
       name: "Pokemon Name",
       height: 10,
@@ -45,10 +45,10 @@ const pokemons: PokeState = {
         },
       ],
     },
-  ],
-  loading: false,
-  error: "",
-};
+    loading: false,
+    error: "",
+  },
+];
 
 const page: PageState = {
   data: {

@@ -3,9 +3,12 @@ import { render, screen } from "@testing-library/react";
 import App from "../App";
 import { Provider } from "react-redux";
 import store from "../redux/store";
-import { configureStore, createStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { getPageAction } from "../redux/pokemonPage/slice";
 import { DarkMode, LightMode } from "@chakra-ui/react";
+import {
+  PokeState,
+} from "../redux/pokemons/types";
 
 test("renders image pokemon image and Skeletons before loading data", () => {
   render(
@@ -39,7 +42,7 @@ test("calls fetchData within useEffect when the component mounts", () => {
   expect(pageState).toEqual(expectedPageState);
 });
 
-test("renders Bodyn component when we fetch pokemons", () => {
+test("renders Body component when we fetch pokemons", () => {
   const initialState = {
     page: {
       data: { count: 0, next: null, previous: null, results: [] },
@@ -47,49 +50,53 @@ test("renders Bodyn component when we fetch pokemons", () => {
       loading: true,
     },
     pokemons: {
-      data: [
+      List: [
         {
-          id: 1,
-          name: "Pokemon Name",
-          height: 10,
-          weight: 10,
-          order: 1,
-          sprites: {
-            front_default:
-              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-            back_default:
-              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png",
+          data: {
+            id: 1,
+            name: "Pokemon Name",
+            height: 10,
+            weight: 10,
+            order: 1,
+            sprites: {
+              front_default:
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+              back_default:
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png",
+            },
+            types: [
+              {
+                slot: 1,
+                type: {
+                  name: "normal",
+                  url: "",
+                },
+              },
+            ],
+            abilities: [
+              {
+                ability: {
+                  name: "ability1",
+                },
+              },
+            ],
+            stats: [
+              {
+                base_stat: 10,
+                stat: {
+                  name: "stat1",
+                },
+              },
+            ],
           },
-          types: [
-            {
-              slot: 1,
-              type: {
-                name: "normal",
-                url: "",
-              },
-            },
-          ],
-          abilities: [
-            {
-              ability: {
-                name: "ability1",
-              },
-            },
-          ],
-          stats: [
-            {
-              base_stat: 10,
-              stat: {
-                name: "stat1",
-              },
-            },
-          ],
+          error: "",
+          loading: false,
         },
       ],
-      error: "",
-      loading: false,
+      StateHolder: {} as PokeState,
     },
   };
+
   const mockstore = configureStore({
     reducer: (state = initialState) => state,
   });
