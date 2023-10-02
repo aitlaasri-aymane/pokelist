@@ -50,7 +50,7 @@ To open Cypress for e2e tests
 
 ### Unit testing coverage
 
-<img width="608" alt="Screen Shot 2023-10-01 at 9 08 49 PM" src="https://github.com/aitlaasri-aymane/pokelist/assets/84875875/d38c654d-9356-4a7e-80c7-29134200d86e">
+<img width="615" alt="Screen Shot 2023-10-02 at 7 26 06 PM" src="https://github.com/aitlaasri-aymane/pokelist/assets/84875875/65715264-8e1e-45c0-973a-4b3e73ad12c2">
 
 ### e2e testing scenarios
 
