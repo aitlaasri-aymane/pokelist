@@ -11,13 +11,18 @@ export type PokeType = {
 };
 
 export type PokeState = {
-  data: PokeType[];
+  data: PokeType;
   loading: boolean;
   error: string;
 };
 
+export type PokeListState = {
+  List: PokeState[];
+  StateHolder: PokeState;
+};
+
 export type PokeStateType = {
-  pokemons: PokeState;
+  pokemons: PokeListState;
 };
 
 export const POKEMONS = "pokemons";

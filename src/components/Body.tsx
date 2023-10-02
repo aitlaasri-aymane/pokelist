@@ -10,7 +10,7 @@ import { getPageAction } from "../redux/pokemonPage/slice";
 
 type BodyProps = {
   page: PageState;
-  pokemons: PokeState;
+  pokemons: PokeState[];
   limit: number;
 };
 
@@ -18,12 +18,12 @@ const Body: React.FC<BodyProps> = ({ page, pokemons, limit }) => {
   const dispatch = useDispatch();
   return (
     <InfiniteScroll
-      dataLength={pokemons.data.length}
+      dataLength={pokemons.length}
       next={() => dispatch(getPageAction({ limit, next: page.data.next }))}
       hasMore={page.data.next !== null}
       loader={
         <div className="flex gap-5 flex-wrap justify-center items-center p-2">
-          {Array.from(Array(6).keys()).map((i) => (
+          {Array.from(Array(3).keys()).map((i) => (
             <CardSkeleton key={i} keyId={i} />
           ))}
         </div>
@@ -36,9 +36,17 @@ const Body: React.FC<BodyProps> = ({ page, pokemons, limit }) => {
       }
     >
       <div className="flex gap-5 flex-wrap justify-center items-center p-2">
-        {pokemons.data.map((pokemon) => (
-          <PokemonCard key={pokemon.id} pokemon={pokemon} />
-        ))}
+        {pokemons.map((pokemonState, index) => {
+          if (pokemonState.loading === true)
+            return <CardSkeleton key={index + "skeleton"} keyId={index} />;
+          else
+            return (
+              <PokemonCard
+                key={pokemonState.data.id}
+                pokemon={pokemonState.data}
+              />
+            );
+        })}
       </div>
     </InfiniteScroll>
   );
