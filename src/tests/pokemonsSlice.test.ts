@@ -8,40 +8,30 @@ import { PokeListState, PokeState, PokeType } from "../redux/pokemons/types";
 
 test("should return the initial state", () => {
   expect(reducer(undefined, { type: undefined })).toEqual({
-    List: [] as PokeState[],
-    StateHolder: {} as PokeState,
+    PokemonsList: {} as { [key: string]: PokeState },
   });
 });
 
 test("should handle getPokemonsAction", () => {
   const initialState: PokeListState = {
-    List: [],
-    StateHolder: {} as PokeState,
+    PokemonsList: {},
   };
   expect(
-    reducer(initialState, getPokemonsAction({} as PageResultType))
+    reducer(initialState, getPokemonsAction({ name: "" } as PageResultType))
   ).toEqual({
-    List: [
-      {
-        data: {} as PokeType,
+    PokemonsList: {
+      "": {
+        data: { name: "" } as PokeType,
         error: "",
         loading: true,
       },
-    ],
-    StateHolder: {},
+    },
   });
 });
 
 test("should handle getPokemonsSuccessAction", () => {
   const previousState: PokeListState = {
-    List: [
-      {
-        data: {} as PokeType,
-        error: "",
-        loading: true,
-      },
-    ],
-    StateHolder: {} as PokeState,
+    PokemonsList: {},
   };
   const pokemon: PokeType = {
     id: 1,
@@ -55,31 +45,27 @@ test("should handle getPokemonsSuccessAction", () => {
     abilities: [{ ability: { name: "" } }],
   };
   expect(reducer(previousState, getPokemonsSuccessAction(pokemon))).toEqual({
-    List: [{ data: pokemon, loading: false, error: "" }],
-    StateHolder: {} as PokeState,
+    PokemonsList: { Pikachu: { data: pokemon, loading: false, error: "" } },
   });
 });
 
 test("should handle getPokemonsErrorAction", () => {
   const previousState: PokeListState = {
-    List: [
-      {
-        data: {} as PokeType,
-        loading: true,
-        error: "",
-      },
-    ],
-    StateHolder: {} as PokeState,
+    PokemonsList: {},
   };
   const errorMessage = "An error occurred";
-  expect(reducer(previousState, getPokemonsErrorAction(errorMessage))).toEqual({
-    List: [
-      {
-        data: {} as PokeType,
+  expect(
+    reducer(
+      previousState,
+      getPokemonsErrorAction({ error: errorMessage, name: "" })
+    )
+  ).toEqual({
+    PokemonsList: {
+      "": {
+        data: { name: "" } as PokeType,
         loading: false,
         error: errorMessage,
       },
-    ],
-    StateHolder: {} as PokeState,
+    },
   });
 });

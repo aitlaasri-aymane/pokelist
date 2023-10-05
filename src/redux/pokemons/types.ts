@@ -17,8 +17,9 @@ export type PokeState = {
 };
 
 export type PokeListState = {
-  List: PokeState[];
-  StateHolder: PokeState;
+  PokemonsList: {
+    [key: string]: PokeState;
+  };
 };
 
 export type PokeStateType = {

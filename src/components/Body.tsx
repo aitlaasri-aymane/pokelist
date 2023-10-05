@@ -3,7 +3,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { PageState } from "../redux/pokemonPage/types";
 import { PokeState } from "../redux/pokemons/types";
 import PokemonCard from "./PokemonCard";
-import { Alert, AlertIcon, ScaleFade } from "@chakra-ui/react";
+import { Alert, AlertIcon } from "@chakra-ui/react";
 import CardSkeleton from "./CardSkeleton";
 import { useDispatch } from "react-redux";
 import { getPageAction } from "../redux/pokemonPage/slice";

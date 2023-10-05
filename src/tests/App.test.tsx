@@ -6,9 +6,6 @@ import store from "../redux/store";
 import { configureStore } from "@reduxjs/toolkit";
 import { getPageAction } from "../redux/pokemonPage/slice";
 import { DarkMode, LightMode } from "@chakra-ui/react";
-import {
-  PokeState,
-} from "../redux/pokemons/types";
 
 test("renders image pokemon image and Skeletons before loading data", () => {
   render(
@@ -50,8 +47,8 @@ test("renders Body component when we fetch pokemons", () => {
       loading: true,
     },
     pokemons: {
-      List: [
-        {
+      PokemonsList: {
+        "Pokemon Name": {
           data: {
             id: 1,
             name: "Pokemon Name",
@@ -92,8 +89,7 @@ test("renders Body component when we fetch pokemons", () => {
           error: "",
           loading: false,
         },
-      ],
-      StateHolder: {} as PokeState,
+      },
     },
   };
 

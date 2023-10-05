@@ -3,8 +3,7 @@ import { POKEMONS, PokeListState, PokeState, PokeType } from "./types";
 import { PageResultType } from "../pokemonPage/types";
 
 const pokeInitialState: PokeListState = {
-  List: [] as PokeState[],
-  StateHolder: {} as PokeState,
+  PokemonsList: {} as { [key: string]: PokeState },
 };
 
 export const pokeSlice = createSlice({
@@ -15,37 +14,33 @@ export const pokeSlice = createSlice({
       state: PokeListState,
       { payload: result }: PayloadAction<PageResultType>
     ) => {
-      state.StateHolder.error = "";
-      state.StateHolder.loading = true;
-      state.StateHolder.data = {} as PokeType;
-      state.List.push(state.StateHolder);
-      state.StateHolder = {} as PokeState;
+      state.PokemonsList[result.name] = {
+        data: { name: result.name } as PokeType,
+        loading: true,
+        error: "",
+      };
     },
     getPokemonsSuccessAction: (
       state: PokeListState,
       { payload: pokemon }: PayloadAction<PokeType>
     ) => {
-      const lastIndex = state.List.length - 1;
-      state.StateHolder.loading = false;
-      state.StateHolder.data = pokemon;
-      state.List[lastIndex] = {
-        ...state.List[lastIndex],
-        ...state.StateHolder,
+      state.PokemonsList[pokemon.name] = {
+        data: pokemon,
+        loading: false,
+        error: "",
       };
-      state.StateHolder = {} as PokeState;
     },
     getPokemonsErrorAction: (
       state: PokeListState,
-      { payload: error }: PayloadAction<string>
+      {
+        payload: { error, name },
+      }: PayloadAction<{ error: string; name: string }>
     ) => {
-      const lastIndex = state.List.length - 1;
-      state.StateHolder.loading = false;
-      state.StateHolder.error = error;
-      state.List[lastIndex] = {
-        ...state.List[lastIndex],
-        ...state.StateHolder,
+      state.PokemonsList[name] = {
+        data: { name: name } as PokeType,
+        loading: false,
+        error: error,
       };
-      state.StateHolder = {} as PokeState;
     },
   },
 });
