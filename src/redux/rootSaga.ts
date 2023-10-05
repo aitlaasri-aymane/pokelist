@@ -1,8 +1,9 @@
 import { all, fork } from "redux-saga/effects";
-import { watchGetPage } from "./sagas";
+
+import { watchGetPage, watchGetPoke } from "./sagas";
 
 const rootSaga = function* () {
-  yield all([fork(watchGetPage)]);
+  yield all([fork(watchGetPage), fork(watchGetPoke)]);
 };
 
 export default rootSaga;

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { call, put, takeLeading } from "redux-saga/effects";
+import { all, put, takeEvery, takeLeading } from "redux-saga/effects";
 import { getPageErrorAction, getPageSuccessAction } from "./pokemonPage/slice";
 import { GET_PAGE, PageResultType, PageType } from "./pokemonPage/types";
 import {
@@ -7,7 +7,7 @@ import {
   getPokemonsErrorAction,
   getPokemonsSuccessAction,
 } from "./pokemons/slice";
-import { PokeType } from "./pokemons/types";
+import { GET_POKEMONS, PokeType } from "./pokemons/types";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 export function* getPokemonPageSaga({
@@ -27,11 +27,11 @@ export function* getPokemonPageSaga({
 
     const { results } = response.data;
 
-    for (const result of results) {
-      yield call(getPokemonsSaga, {
-        payload: result,
-      } as PayloadAction<PageResultType>);
-    }
+    yield all(
+      results.map(function* (result: PageResultType) {
+        yield put(getPokemonsAction(result));
+      })
+    );
   } catch (error) {
     yield put(getPageErrorAction(error as string));
   }
@@ -42,13 +42,21 @@ export function* getPokemonsSaga({
 }: PayloadAction<PageResultType>) {
   try {
     const response: AxiosResponse<PokeType> = yield axios.get(result.url);
-    yield put(getPokemonsAction(result));
     yield put(getPokemonsSuccessAction(response.data));
   } catch (error) {
-    yield put(getPokemonsErrorAction(error as string));
+    yield put(
+      getPokemonsErrorAction({
+        error: error as string,
+        name: result.name as string,
+      })
+    );
   }
 }
 
 export function* watchGetPage() {
   yield takeLeading(GET_PAGE, getPokemonPageSaga);
+}
+
+export function* watchGetPoke() {
+  yield takeEvery(GET_POKEMONS, getPokemonsSaga);
 }

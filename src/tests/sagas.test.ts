@@ -116,9 +116,6 @@ describe("getPokemonsSaga", () => {
     );
 
     expect(dispatched[0]).toEqual(
-      getPokemonsAction(dummyResult as PageResultType)
-    );
-    expect(dispatched[1]).toEqual(
       getPokemonsSuccessAction(dummyResponse.data as PokeType)
     );
 
@@ -130,12 +127,10 @@ describe("getPokemonsSaga", () => {
   it("should call API and dispatch error action on failure", async () => {
     const requestPokemon = mockedAxios.get.mockRejectedValue("error");
 
-    const dummyResults: PageResultType[] = [
-      {
-        name: "bulbasaur",
-        url: "",
-      },
-    ];
+    const dummyResults: PageResultType = {
+      name: "bulbasaur",
+      url: "",
+    };
 
     const dispatched: any[] = [];
     const result: Task = await runSaga<any, any, any>(
@@ -149,9 +144,11 @@ describe("getPokemonsSaga", () => {
       }
     );
 
-    expect(dispatched[0]).toEqual(getPokemonsErrorAction("error"));
+    expect(dispatched[0]).toEqual(
+      getPokemonsErrorAction({ error: "error", name: "bulbasaur" })
+    );
 
-    expect(requestPokemon).toHaveBeenCalledTimes(dummyResults.length);
+    expect(requestPokemon).toHaveBeenCalledTimes(1);
 
     requestPokemon.mockRestore();
   });

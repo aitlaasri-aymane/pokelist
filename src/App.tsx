@@ -10,7 +10,9 @@ import CardSkeleton from "./components/CardSkeleton";
 
 const App = () => {
   const page = useSelector((state: PageStateType) => state.page);
-  const pokemons = useSelector((state: PokeStateType) => state.pokemons.List);
+  const pokemons = useSelector(
+    (state: PokeStateType) => state.pokemons.PokemonsList
+  );
   const limit = 15;
 
   const dispatch = useDispatch();
@@ -56,7 +58,7 @@ const App = () => {
           )}
         </div>
 
-        {pokemons.length === 0 ? (
+        {Object.keys(pokemons).length === 0 ? (
           <div
             data-testid="skeleton-body"
             className="flex gap-5 flex-wrap justify-center items-center p-2"
@@ -67,7 +69,11 @@ const App = () => {
           </div>
         ) : (
           <div data-testid="main-body">
-            <Body page={page} pokemons={pokemons} limit={limit} />
+            <Body
+              page={page}
+              pokemons={Object.values(pokemons)}
+              limit={limit}
+            />
           </div>
         )}
       </div>
